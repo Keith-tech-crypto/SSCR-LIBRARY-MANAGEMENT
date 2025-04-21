@@ -3,24 +3,28 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail, Lock } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { toast } = useToast();
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup attempt with:", { email, password, confirmPassword });
+    
+    // Show toast notification to confirm form submission
+    toast({
+      title: "Form submitted",
+      description: "Your signup information has been received.",
+    });
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left Side removed (no picture on left) */}
-      <div className="hidden md:block w-1/2 bg-sscr-yellow" />
-
-      {/* Right Side - Yellow Background with Form */}
-      <div className="w-full md:w-1/2 bg-sscr-yellow p-8 flex flex-col items-center justify-center relative">
+    <div className="min-h-screen flex items-center justify-center bg-sscr-yellow p-4">
+      <div className="w-full max-w-md bg-sscr-yellow p-8 flex flex-col items-center justify-center">
         {/* San Sebastian College logo centered above the heading */}
         <div className="mb-4 flex justify-center w-full">
           <img
@@ -101,4 +105,3 @@ const Index = () => {
 };
 
 export default Index;
-
