@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail, Lock } from "lucide-react";
@@ -15,29 +15,21 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-sscr-yellow relative">
-      {/* Left Side - San Sebastian College Text */}
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 bg-sscr-yellow">
-        <div className="text-center mb-4">
-          <h1
-            className="font-bebas text-8xl tracking-wider"
-            style={{ color: "#ea384c" }}
-          >
-            San
-          </h1>
-          <h1
-            className="font-bebas text-7xl -mt-8 tracking-wider"
-            style={{ color: "#ea384c" }}
-          >
-            Sebastian
-          </h1>
-          <h1
-            className="font-bebas text-6xl -mt-8 tracking-wider"
-            style={{ color: "#ea384c" }}
-          >
-            College
-          </h1>
-        </div>
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Left Side - Welcome Text */}
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 bg-white">
+        <h1
+          className="italic font-bebas text-[5.5rem] text-yellow-400 drop-shadow-[2px_2px_0px_#d4af37] select-none"
+          style={{ textShadow: "3px 3px 0 #b39200" }}
+        >
+          WELCOME
+        </h1>
+        <h2
+          className="font-bebas text-6xl text-sscr-red -mt-4 select-none"
+          style={{ color: "#CF1C27" }}
+        >
+          SSCR LIBRARY
+        </h2>
       </div>
 
       {/* Right Side - Yellow Background with Form */}
@@ -50,8 +42,8 @@ const Index = () => {
         />
 
         <h3
-          className="font-bebas text-3xl text-center mb-8 tracking-wider"
-          style={{ color: "#ea384c" }}
+          className="font-bebas text-3xl text-sscr-red text-center mb-8 tracking-wider select-none"
+          style={{ color: "#CF1C27" }}
         >
           ENTER YOUR DETAILS
         </h3>
@@ -64,7 +56,7 @@ const Index = () => {
                 <Input
                   type="email"
                   placeholder="EMAIL"
-                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-xl text-black placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
+                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-xl text-sscr-red placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -80,7 +72,7 @@ const Index = () => {
                 <Input
                   type="password"
                   placeholder="PASSWORD"
-                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-xl text-black placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
+                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-xl text-sscr-red placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -96,7 +88,7 @@ const Index = () => {
                 <Input
                   type="password"
                   placeholder="CONFIRM PASSWORD"
-                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-xl text-black placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
+                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-xl text-sscr-red placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -120,4 +112,3 @@ const Index = () => {
 };
 
 export default Index;
-
