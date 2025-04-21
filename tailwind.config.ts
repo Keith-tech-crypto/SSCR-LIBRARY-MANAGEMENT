@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'bebas': ['"Bebas Neue"', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -51,6 +54,12 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
+				},
+				// Custom colors for SSCR Library
+				sscr: {
+					yellow: '#FFDC3D',
+					red: '#CF1C27',
+					white: '#FFFFFF'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
