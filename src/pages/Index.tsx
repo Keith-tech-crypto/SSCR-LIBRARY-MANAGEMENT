@@ -16,25 +16,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left Side - Welcome Text */}
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 bg-white">
-        <h1
-          className="italic font-bebas text-[5.5rem] text-yellow-400 drop-shadow-[2px_2px_0px_#d4af37] select-none"
-          style={{ textShadow: "3px 3px 0 #b39200" }}
-        >
-          WELCOME
-        </h1>
-        <h2
-          className="font-bebas text-6xl text-sscr-red -mt-4 select-none"
-          style={{ color: "#CF1C27" }}
-        >
-          SSCR LIBRARY
-        </h2>
-      </div>
+      {/* Left Side removed (no picture on left) */}
+      <div className="hidden md:block w-1/2 bg-sscr-yellow" />
 
       {/* Right Side - Yellow Background with Form */}
       <div className="w-full md:w-1/2 bg-sscr-yellow p-8 flex flex-col items-center justify-center relative">
-        {/* Move San Sebastian College logo here, centered above the heading */}
+        {/* San Sebastian College logo centered above the heading */}
         <div className="mb-4 flex justify-center w-full">
           <img
             src="/lovable-uploads/279838fe-eb35-465a-ab85-fd3312906e24.png"
