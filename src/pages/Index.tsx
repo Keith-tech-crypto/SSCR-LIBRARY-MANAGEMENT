@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { user, lock } from "lucide-react";
+import { User, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -97,7 +97,7 @@ const Index = () => {
           <div className="mb-4 w-full relative">
             <div className="bg-white rounded-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,0.25)]">
               <div className="flex items-center px-4 py-2">
-                <user className="h-7 w-7 mr-2 text-black" />
+                <User className="h-7 w-7 mr-2 text-black" />
                 <Input
                   type="text"
                   placeholder="USERNAME"
@@ -114,7 +114,7 @@ const Index = () => {
           <div className="mb-6 w-full relative">
             <div className="bg-white rounded-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,0.25)]">
               <div className="flex items-center px-4 py-2">
-                <lock className="h-7 w-7 mr-2 text-black" />
+                <Lock className="h-7 w-7 mr-2 text-black" />
                 <Input
                   type="password"
                   placeholder="PASSWORD"
