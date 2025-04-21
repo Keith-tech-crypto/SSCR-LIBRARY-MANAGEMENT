@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail, Lock } from "lucide-react";
-import MonkIllustration from "@/components/MonkIllustration";
 import SSCRLogo from "@/components/SSCRLogo";
 
 const Index = () => {
@@ -18,15 +17,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left Side - White Background with Illustration */}
+      {/* Left Side - White Background with Illustration (removed) */}
       <div className="w-full md:w-1/2 bg-white p-8 flex flex-col items-center justify-center">
         <div className="text-center mb-4">
           <h1 className="font-bebas text-7xl md:text-8xl tracking-wider text-sscr-yellow drop-shadow-md">WELCOME</h1>
           <h2 className="font-bebas text-4xl md:text-5xl tracking-wider text-sscr-red">SSCR LIBRARY</h2>
         </div>
-        <div className="mt-8">
-          <MonkIllustration />
-        </div>
+        {/* Removed MonkIllustration */}
       </div>
 
       {/* Right Side - Yellow Background with Form */}
