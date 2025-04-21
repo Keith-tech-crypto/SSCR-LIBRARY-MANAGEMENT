@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -52,8 +53,14 @@ const Index = () => {
           >
             SSCR LIBRARY
           </h2>
+          {/* New monk illustration image */}
+          <img
+            src="/lovable-uploads/0bb7411b-72a4-44e5-9ab5-6f801ad530f2.png"
+            alt="Saint Thomas of Villanova"
+            className="w-[280px] md:w-[350px] lg:w-[360px] max-w-full h-auto mt-3 mb-4"
+            draggable={false}
+          />
         </div>
-        {/* Removed the monk illustration image as requested */}
       </div>
 
       {/* RIGHT SIDE */}
@@ -167,3 +174,4 @@ const Index = () => {
 };
 
 export default Index;
+
