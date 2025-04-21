@@ -15,8 +15,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-sscr-yellow">
-      {/* Left Side - San Sebastian College Logo and Text */}
+    <div className="min-h-screen flex flex-col md:flex-row bg-sscr-yellow relative">
+      {/* Left Side - San Sebastian College Text */}
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 bg-sscr-yellow">
         <div className="text-center mb-4">
           <h1
@@ -41,7 +41,14 @@ const Index = () => {
       </div>
 
       {/* Right Side - Yellow Background with Form */}
-      <div className="w-full md:w-1/2 bg-sscr-yellow p-8 flex flex-col items-center justify-center">
+      <div className="w-full md:w-1/2 bg-sscr-yellow p-8 flex flex-col items-center justify-center relative">
+        {/* San Sebastian College logo upper right */}
+        <img
+          src="/lovable-uploads/279838fe-eb35-465a-ab85-fd3312906e24.png"
+          alt="San Sebastian College Logo"
+          className="absolute top-4 right-4 w-24 h-24 object-contain"
+        />
+
         <h3
           className="font-bebas text-3xl text-center mb-8 tracking-wider"
           style={{ color: "#ea384c" }}
@@ -113,3 +120,4 @@ const Index = () => {
 };
 
 export default Index;
+
