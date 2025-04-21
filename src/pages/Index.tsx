@@ -53,11 +53,11 @@ const Index = () => {
           >
             SSCR LIBRARY
           </h2>
-          {/* New uploaded image replacing the monk illustration */}
+          {/* Image placed at the bottom of SSCR LIBRARY heading */}
           <img
-            src="/lovable-uploads/04b69afe-cc1e-455f-8b8f-41462442d500.png"
-            alt="New SSCR Library Illustration"
-            className="w-[280px] md:w-[350px] lg:w-[360px] max-w-full h-auto mt-3 mb-4"
+            src="/lovable-uploads/d74c3427-8ff0-464f-ae1a-daafa1e1ea32.png"
+            alt="Saint Thomas of Villanova Reading"
+            className="w-[280px] md:w-[350px] lg:w-[360px] max-w-full h-auto mt-4 mb-4"
             draggable={false}
           />
         </div>
