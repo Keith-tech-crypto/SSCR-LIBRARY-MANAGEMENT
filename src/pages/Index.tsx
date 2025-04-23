@@ -1,11 +1,9 @@
-
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { User, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/lib/supabaseClient";
 
 const Index = () => {
   const [username, setUsername] = useState("");
@@ -17,42 +15,26 @@ const Index = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Hardcoded admin credentials
+    // Hardcoded admin credentials only
     if (username === "admin" && password === "1234") {
       toast({ title: "Success!", description: "Logged in as admin." });
       navigate("/home");
       return;
     }
 
-    // Regular Supabase login
-    if (!username || !password) {
-      toast({ title: "Missing info", description: "Please provide credentials." });
-      return;
-    }
-    
-    const { error } = await supabase.auth.signInWithPassword({
-      email: username,
-      password,
-    });
-    
-    if (error) {
-      toast({ title: "Login failed", description: error.message });
-      return;
-    }
-    
-    toast({ title: "Success!", description: "Logged in." });
-    navigate("/home");
+    toast({ title: "Login failed", description: "Invalid credentials." });
   };
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/signup");
+    toast({ title: "Not Supported", description: "Sign up is disabled for demo mode. Use admin/1234." });
   };
 
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row">
       {/* LEFT SIDE */}
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-white py-8 px-6">
+        {/* Branding and images */}
         <div className="w-full flex flex-col items-center justify-center mb-8 mt-8 md:mt-0 animate-fade-in">
           <h1
             className="text-[3.3rem] md:text-[4rem] font-bold italic"
@@ -75,7 +57,6 @@ const Index = () => {
           >
             SSCR LIBRARY
           </h2>
-          {/* Image placed at the bottom of SSCR LIBRARY heading */}
           <img
             src="/lovable-uploads/d74c3427-8ff0-464f-ae1a-daafa1e1ea32.png"
             alt="Saint Thomas of Villanova Reading"
@@ -87,7 +68,7 @@ const Index = () => {
 
       {/* RIGHT SIDE */}
       <div className="w-full md:w-1/2 min-h-screen flex flex-col bg-sscr-yellow items-center px-4 pt-8 pb-4 justify-start md:justify-center">
-        {/* Logo */}
+        {/* Logo and heading */}
         <div className="w-full flex justify-center mb-2">
           <img
             src="/lovable-uploads/279838fe-eb35-465a-ab85-fd3312906e24.png"
@@ -96,7 +77,6 @@ const Index = () => {
             draggable={false}
           />
         </div>
-        {/* Heading */}
         <h3
           className="font-bebas text-xl md:text-2xl text-sscr-red mb-8 mt-3 tracking-wider select-none text-center"
           style={{
@@ -171,7 +151,9 @@ const Index = () => {
               type="button"
               className="text-xs text-sscr-red font-bebas tracking-wider hover:underline bg-transparent outline-none border-none cursor-pointer"
               style={{ color: "#CF1C27" }}
-              onClick={() => navigate("/forgot-password")}
+              onClick={() => {
+                toast({ title: "Not Supported", description: "Forgot password is disabled for demo mode." });
+              }}
             >
               FORGOT PASSWORD?
             </button>

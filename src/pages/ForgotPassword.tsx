@@ -1,22 +1,10 @@
 
-import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { User, Lock } from "lucide-react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [newPw, setNewPw] = useState("");
   const navigate = useNavigate();
-
-  // Simple demo: alerts for all actions.
-  const handleSendCode = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !code || !newPw) return alert("Please fill all fields!");
-    alert("Password reset attempted!");
-  };
 
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row">
@@ -73,80 +61,18 @@ const ForgotPassword = () => {
             textShadow: "1px 1px 0 #fff8, 2px 4px 4px #0001",
           }}
         >
-          FORGOT PASSWORD
+          PASSWORD RESET IS DISABLED FOR DEMO.<br />Use <b>admin</b> / <b>1234</b>
         </div>
-        <form
-          onSubmit={handleSendCode}
-          className="w-full max-w-xs flex flex-col items-center"
-          autoComplete="off"
-        >
-          {/* EMAIL */}
-          <div className="mb-5 w-full relative">
-            <div className="bg-white rounded-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,0.25)]">
-              <div className="flex items-center px-4 py-2">
-                <User className="h-7 w-7 mr-2 text-black" />
-                <Input
-                  type="email"
-                  placeholder="EMAIL"
-                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-lg text-sscr-red placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                />
-              </div>
-            </div>
-          </div>
-          {/* CODE */}
-          <div className="mb-5 w-full relative">
-            <div className="bg-white rounded-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,0.25)]">
-              <div className="flex items-center px-4 py-2">
-                <Lock className="h-7 w-7 mr-2 text-black" />
-                <Input
-                  type="text"
-                  placeholder="CODE"
-                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-lg text-sscr-red placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
-                  value={code}
-                  onChange={e => setCode(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          {/* NEW PASSWORD */}
-          <div className="mb-6 w-full relative">
-            <div className="bg-white rounded-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,0.25)]">
-              <div className="flex items-center px-4 py-2">
-                <Lock className="h-7 w-7 mr-2 text-black" />
-                <Input
-                  type="password"
-                  placeholder="NEW PASSWORD"
-                  className="border-none shadow-none focus-visible:ring-0 font-bebas text-lg text-sscr-red placeholder:text-sscr-red placeholder:opacity-100 pl-0 placeholder:tracking-wider"
-                  value={newPw}
-                  onChange={e => setNewPw(e.target.value)}
-                  required
-                  autoComplete="new-password"
-                />
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center w-full mt-8">
           <Button
-            type="submit"
-            className="bg-sscr-red hover:bg-sscr-red/90 text-sscr-white font-bebas text-xl py-2 rounded-md tracking-wider w-full shadow-[3px_3px_0px_0px_rgba(0,0,0,0.25)] transition"
+            type="button"
+            variant="secondary"
+            className="gap-2 text-sscr-red font-bebas text-base bg-white hover:bg-gray-100 border border-black px-4 py-1 rounded shadow"
+            onClick={() => navigate("/")}
           >
-            SEND CODE
+            Back to Login
           </Button>
-          <div className="flex items-center w-full mt-8">
-            <Button
-              type="button"
-              variant="secondary"
-              className="gap-2 text-sscr-red font-bebas text-base bg-white hover:bg-gray-100 border border-black px-4 py-1 rounded shadow"
-              onClick={() => navigate("/")}
-            >
-              Back to Login
-            </Button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
