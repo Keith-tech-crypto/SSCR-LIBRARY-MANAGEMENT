@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,19 +17,29 @@ const Index = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Using email for login—username field should be the user's email.
+    // Hardcoded admin credentials
+    if (username === "admin" && password === "1234") {
+      toast({ title: "Success!", description: "Logged in as admin." });
+      navigate("/home");
+      return;
+    }
+
+    // Regular Supabase login
     if (!username || !password) {
       toast({ title: "Missing info", description: "Please provide credentials." });
       return;
     }
+    
     const { error } = await supabase.auth.signInWithPassword({
       email: username,
       password,
     });
+    
     if (error) {
       toast({ title: "Login failed", description: error.message });
       return;
     }
+    
     toast({ title: "Success!", description: "Logged in." });
     navigate("/home");
   };
