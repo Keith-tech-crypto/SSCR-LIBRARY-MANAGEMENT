@@ -47,7 +47,7 @@ const SignUp = () => {
             SSCR LIBRARY
           </h2>
           <img
-            src="/lovable-uploads/25c7a298-faee-4e86-836a-5f36c8bb8984.png"
+            src="/lovable-uploads/b49445c8-a152-4b26-8e1e-e5a0192c91e1.png"
             alt="Monk Illustration"
             className="w-[280px] md:w-[350px] lg:w-[360px] max-w-full h-auto mt-5 mb-4"
             draggable={false}
