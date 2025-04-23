@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { User, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/lib/supabaseClient";
 
 const Index = () => {
   const [username, setUsername] = useState("");
@@ -12,12 +13,24 @@ const Index = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Login submitted",
-      description: "You attempted to login.",
+
+    // Using email for login—username field should be the user's email.
+    if (!username || !password) {
+      toast({ title: "Missing info", description: "Please provide credentials." });
+      return;
+    }
+    const { error } = await supabase.auth.signInWithPassword({
+      email: username,
+      password,
     });
+    if (error) {
+      toast({ title: "Login failed", description: error.message });
+      return;
+    }
+    toast({ title: "Success!", description: "Logged in." });
+    navigate("/home");
   };
 
   const handleSignup = (e: React.FormEvent) => {

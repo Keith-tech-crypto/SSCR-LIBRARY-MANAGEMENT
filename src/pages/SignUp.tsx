@@ -1,23 +1,34 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { User, Lock, ArrowLeft } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
+import { useToast } from "@/hooks/use-toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [pw2, setPw2] = useState("");
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
-  // For demonstration: alert, you can replace with toast if needed
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Basic validation for illustration
-    if (!email || !pw || !pw2) return alert("Please complete all fields.");
-    if (pw !== pw2) return alert("Passwords do not match.");
-    alert("Sign up submitted!");
+    if (!email || !pw || !pw2) return toast({ title: "Missing fields", description: "Please complete all fields." });
+    if (pw !== pw2) return toast({ title: "Password mismatch", description: "Passwords do not match." });
+    setLoading(true);
+    const { error } = await supabase.auth.signUp({ email, password: pw });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Sign up failed", description: error.message });
+      return;
+    }
+    toast({ title: "Sign up successful", description: "Check your email to confirm your registration." });
+    setEmail("");
+    setPw("");
+    setPw2("");
   };
 
   return (
