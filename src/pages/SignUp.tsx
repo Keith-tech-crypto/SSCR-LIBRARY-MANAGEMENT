@@ -1,11 +1,64 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, User, Mail, Key } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const signUpSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string(),
+  acceptTerms: z.boolean().refine(val => val === true, {
+    message: "You must accept the terms and conditions"
+  })
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"]
+});
+
+type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<SignUpFormValues>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      acceptTerms: false
+    }
+  });
+
+  const onSubmit = async (data: SignUpFormValues) => {
+    setIsSubmitting(true);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      setIsSubmitting(false);
+      toast({
+        title: "Account created!",
+        description: "Your account has been created successfully. Please check your email for verification.",
+      });
+      navigate("/");
+      // In a real app, you would make an API call to create the account
+    }, 1500);
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row">
       {/* LEFT */}
@@ -51,29 +104,177 @@ const SignUp = () => {
             draggable={false}
           />
         </div>
-        {/* Info */}
-        <div
-          className="font-bebas text-xl md:text-2xl text-sscr-red mb-8 mt-3 tracking-wider select-none text-center"
-          style={{
-            color: "#CF1C27",
-            letterSpacing: "0.03em",
-            fontWeight: 700,
-            fontFamily: '"Bebas Neue", sans-serif',
-            textShadow: "1px 1px 0 #fff8, 2px 4px 4px #0001",
-          }}
-        >
-          SIGN UP IS DISABLED FOR DEMO.<br />Use <b>admin</b> / <b>1234</b>
-        </div>
-        <div className="flex items-center w-full mt-6">
-          <Button
-            type="button"
-            variant="secondary"
-            className="gap-2 text-sscr-red font-bebas text-base bg-white hover:bg-gray-100 border border-black px-4 py-1 rounded shadow"
-            onClick={() => navigate("/")}
+
+        <div className="w-full max-w-md px-4">
+          <div
+            className="font-bebas text-2xl md:text-3xl text-sscr-red mb-4 text-center tracking-wider"
+            style={{
+              color: "#CF1C27",
+              letterSpacing: "0.03em",
+              fontWeight: 700,
+              fontFamily: '"Bebas Neue", sans-serif',
+              textShadow: "1px 1px 0 #fff8, 2px 4px 4px #0001",
+            }}
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Login
-          </Button>
+            CREATE ACCOUNT
+          </div>
+          
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <div className="flex flex-col md:flex-row gap-4">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                          <Input 
+                            placeholder="First Name" 
+                            {...field} 
+                            className="bg-white pl-10"
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                          <Input 
+                            placeholder="Last Name" 
+                            {...field} 
+                            className="bg-white pl-10"
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                        <Input 
+                          placeholder="your.email@example.com" 
+                          type="email"
+                          {...field} 
+                          className="bg-white pl-10"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                        <Input 
+                          placeholder="Password" 
+                          type="password"
+                          {...field} 
+                          className="bg-white pl-10"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                        <Input 
+                          placeholder="Confirm Password" 
+                          type="password"
+                          {...field} 
+                          className="bg-white pl-10"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="acceptTerms"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 pt-2">
+                    <FormControl>
+                      <Checkbox 
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel className="text-sm font-normal">
+                        I accept the <a href="#" className="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
+                      </FormLabel>
+                      <FormMessage />
+                    </div>
+                  </FormItem>
+                )}
+              />
+              
+              <div className="pt-4">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-sscr-red hover:bg-red-700 text-white font-bold rounded"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Creating Account..." : "Create Account"}
+                </Button>
+              </div>
+            </form>
+          </Form>
+          
+          <div className="flex items-center w-full mt-8">
+            <Button
+              type="button"
+              variant="secondary"
+              className="gap-2 text-sscr-red font-bebas text-base bg-white hover:bg-gray-100 border border-black px-4 py-1 rounded shadow"
+              onClick={() => navigate("/")}
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Back to Login
+            </Button>
+          </div>
         </div>
       </div>
     </div>
