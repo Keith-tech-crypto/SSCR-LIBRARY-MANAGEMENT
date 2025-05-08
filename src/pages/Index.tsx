@@ -1,7 +1,8 @@
+
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { User, Lock } from "lucide-react";
+import { User, Lock, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -29,10 +30,27 @@ const Index = () => {
     navigate("/signup");
   };
 
+  const goBack = () => {
+    navigate(-1); // Navigate to the previous page in history
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row">
       {/* LEFT SIDE */}
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-white py-8 px-6">
+        {/* Go Back button */}
+        <div className="w-full px-4 mb-4">
+          <Button 
+            type="button" 
+            variant="ghost" 
+            className="flex items-center text-sscr-red hover:bg-transparent hover:text-sscr-red/80" 
+            onClick={goBack}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            <span className="font-bebas">GO BACK</span>
+          </Button>
+        </div>
+        
         {/* Branding and images */}
         <div className="w-full flex flex-col items-center justify-center mb-8 mt-8 md:mt-0 animate-fade-in">
           <h1
