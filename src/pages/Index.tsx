@@ -25,9 +25,8 @@ const Index = () => {
     toast({ title: "Login failed", description: "Invalid credentials." });
   };
 
-  const handleSignup = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({ title: "Not Supported", description: "Sign up is disabled for demo mode. Use admin/1234." });
+  const handleSignup = () => {
+    navigate("/signup");
   };
 
   return (
@@ -151,9 +150,7 @@ const Index = () => {
               type="button"
               className="text-xs text-sscr-red font-bebas tracking-wider hover:underline bg-transparent outline-none border-none cursor-pointer"
               style={{ color: "#CF1C27" }}
-              onClick={() => {
-                toast({ title: "Not Supported", description: "Forgot password is disabled for demo mode." });
-              }}
+              onClick={() => navigate("/forgot-password")}
             >
               FORGOT PASSWORD?
             </button>

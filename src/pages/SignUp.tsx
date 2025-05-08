@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -47,16 +46,25 @@ const SignUp = () => {
   const onSubmit = async (data: SignUpFormValues) => {
     setIsSubmitting(true);
     
-    // Simulate API call delay
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // In a real app, you would make an API call to create the account
       toast({
         title: "Account created!",
-        description: "Your account has been created successfully. Please check your email for verification.",
+        description: "Your account has been created successfully. Please log in with your credentials.",
       });
+      
+      // Navigate to login page after successful registration
       navigate("/");
-      // In a real app, you would make an API call to create the account
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to create account. Please try again later.",
+      });
+      setIsSubmitting(false);
+    }
   };
 
   return (
